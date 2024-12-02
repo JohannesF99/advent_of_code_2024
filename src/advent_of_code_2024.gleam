@@ -4,5 +4,5 @@ import gleam/io
 
 pub fn main() {
   io.debug(day_1.sol())
-  io.debug(day_2.sol())
+  io.debug(day_2.sol(True, "resources/day_2.txt"))
 }

@@ -1,15 +1,13 @@
-import gleam/int
 import gleam/list
-import gleam/string
-import simplifile
+import util
 
 type Movement {
   Increase
   Decrease
 }
 
-pub fn sol() -> #(Int, Int) {
-  let n = read_file()
+pub fn sol(is_file is_file: Bool, content content: String) -> #(Int, Int) {
+  let n = util.read_file(is_file: is_file, content: content)
 
   let part_1 =
     n
@@ -74,20 +72,5 @@ fn get_movement(a: List(Int)) -> Movement {
   case first > last {
     True -> Decrease
     False -> Increase
-  }
-}
-
-fn read_file() -> List(List(Int)) {
-  case simplifile.read("resources/day_2.txt") {
-    Ok(content) ->
-      content
-      |> string.split("\n")
-      |> list.filter(fn(line: String) { !string.is_empty(line) })
-      |> list.map(fn(line: String) {
-        let assert Ok(numbers) =
-          string.split(line, " ") |> list.try_map(int.parse)
-        numbers
-      })
-    Error(_) -> panic as "Could not read input file"
   }
 }
